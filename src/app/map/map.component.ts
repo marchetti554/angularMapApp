@@ -18,7 +18,6 @@ export class MapComponent implements OnInit {
       'mapsApiKey': 'AIzaSyAn2hZI0YNP8qLsu4_twew-OoeV1p4_I5o'
     });
     google.charts.setOnLoadCallback(drawRegionsMap);
-
     function drawRegionsMap() {
       var data = google.visualization.arrayToDataTable([
         ['Country', 'Popularity'],
@@ -31,7 +30,6 @@ export class MapComponent implements OnInit {
       ]);
 
       var options = {};
-
       var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
       chart.draw(data, options);
