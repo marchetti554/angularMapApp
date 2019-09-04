@@ -8,7 +8,5 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'Top 10 No-Anime Heroes';
-  marvelSubtitle = 'Marvel Heroes';
-  dcSubtitle = 'DC Heroes';
+  title = 'How much percentage of the world do you know?';
 }
