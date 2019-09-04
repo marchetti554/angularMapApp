@@ -22,7 +22,7 @@ export class MapComponent implements OnInit {
     function drawRegionsMap() {
       var data = google.visualization.arrayToDataTable([
         ['Country', 'Popularity'],
-        ['Germany', 200],
+        ['Germany', 900],
         ['United States', 300],
         ['Brazil', 400],
         ['Canada', 500],
