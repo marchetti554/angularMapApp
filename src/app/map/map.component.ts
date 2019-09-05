@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+declare var google: any;
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -8,31 +10,38 @@ import { Component, OnInit } from '@angular/core';
 
 export class MapComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit() {
+    
     google.charts.load('current', {
-      'packages':['geochart'],
-      // Note: you will need to get a mapsApiKey for your project.
-      // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-      'mapsApiKey': 'AIzaSyAn2hZI0YNP8qLsu4_twew-OoeV1p4_I5o'
-    });
-    google.charts.setOnLoadCallback(drawRegionsMap);
-    function drawRegionsMap() {
+      packages:['controls', 'geochart']
+    }).then(function () {
       var data = google.visualization.arrayToDataTable([
-        ['Country', 'Popularity'],
-        ['Germany', 900],
-        ['United States', 300],
-        ['Brazil', 400],
-        ['Canada', 500],
-        ['France', 600],
-        ['RU', 700]
+        ['Country', 'Popularity', 'Domain'],
+        ['Argentina', '100', 'You selected Argentina!']
       ]);
-
-      var options = {};
-      var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
-
-      chart.draw(data, options);
-    }
+    
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1]);
+    
+      var GeoChart = new google.visualization.ChartWrapper({
+        chartType: 'GeoChart',
+        containerId: 'regions_div',
+        dataTable: view
+      });
+    
+      google.visualization.events.addListener(GeoChart, 'ready', function () {
+        google.visualization.events.addListener(GeoChart.getChart(), 'select', function () {
+          var selection = GeoChart.getChart().getSelection();
+          if (selection.length > 0) {
+            alert(data.getValue(selection[0].row, 2))
+            //console.log(data.getValue(selection[0].row, 2));
+          }
+        });
+      });
+      GeoChart.draw();
+    });
   }
 }
