@@ -281,14 +281,14 @@ export class MapComponent implements OnInit {
         chartType: 'GeoChart',
         containerId: 'regions_div',
         dataTable: view
-      });
-    
+	  });
+	  
+
       google.visualization.events.addListener(GeoChart, 'ready', function () {
         google.visualization.events.addListener(GeoChart.getChart(), 'select', function () {
           var selection = GeoChart.getChart().getSelection();
           if (selection.length > 0) {
 			data.setValue(selection[0].row, 1, 0);
-			alert("You selected -> " + data.getValue(selection[0].row, 0))
 			GeoChart.draw();
           }
 		});

@@ -3,7 +3,7 @@
   <h1>{{title}}</h1>
 </div>
 <h2>Select which countries you visited: </h2>
-<button mat-button>Deselect All</button>
+<button (click)="handleClick($event)" mat-button>Deselect All</button>
 <app-map></app-map>
 
 

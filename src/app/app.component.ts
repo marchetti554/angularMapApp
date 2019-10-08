@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
@@ -7,6 +7,17 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'How much percentage of the world do you know?';
+
+  constructor() { 
+  }
+
+  ngOnInit() {
+
+  }
+
+  handleClick(event: Event) {
+    console.log("This should deselect all countries!", event);
+  }
 }
