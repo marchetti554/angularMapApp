@@ -282,19 +282,23 @@ export class MapComponent implements OnInit {
         containerId: 'regions_div',
         dataTable: view
 	  });
-	  
 
-      google.visualization.events.addListener(GeoChart, 'ready', function () {
-        google.visualization.events.addListener(GeoChart.getChart(), 'select', function () {
-          var selection = GeoChart.getChart().getSelection();
-          if (selection.length > 0) {
-			data.setValue(selection[0].row, 1, 0);
-			GeoChart.draw();
-          }
+
+		google.visualization.events.addListener(GeoChart, 'ready', function () {
+			google.visualization.events.addListener(GeoChart.getChart(), 'select', function () {
+				var selection = GeoChart.getChart().getSelection();
+				if (selection.length > 0) {
+					if (data.getValue(selection[0].row, 1) == 100) {
+						data.setValue(selection[0].row, 1, 0);
+					} else {
+						data.setValue(selection[0].row, 1, 100);
+					}
+				}
+				GeoChart.draw();
+			});
 		});
-	  });
-	  
-      GeoChart.draw();
-    });
-  }
+
+		GeoChart.draw();
+	});
+	}
 }
